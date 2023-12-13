@@ -84,7 +84,7 @@ const images = [
 
   gallery.addEventListener('click', event => event.preventDefault());
 
-  gallery.addEventListener('click', event => {
+  function modalWindow(event) {
     if (event.target.nodeName !== 'IMG') {
       return;
     }
@@ -92,8 +92,8 @@ const images = [
     const instance = basicLightbox.create(
       `<img src="${event.target.dataset.source}" width="1112" height="640"/>`,
       {
-        onShow: (instance) => {gallery.addEventListener('keydown', eventEsc)},
-        onClose: (instance) => {gallery.removeEventListener('keydown', eventEsc)}
+        onShow: (instance) => {document.addEventListener('keydown', eventEsc)},
+        onClose: (instance) => {document.removeEventListener('keydown', eventEsc)}
       }
       );
     instance.show();
@@ -103,6 +103,8 @@ const images = [
         instance.close();
       }
     };
-  });
+  };
+
+  gallery.addEventListener('click', modalWindow);
 
  
